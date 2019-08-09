@@ -9,7 +9,9 @@
 import UIKit
 
 class ProgrammatiqueController: UIViewController {
-
+    
+    @IBOutlet weak var scroll: UIScrollView!
+    
     var monPremierUIView: UIView? // ? : en optionnel
     var monPremierLabel : UILabel?
     var monPremierBouton: UIButton?
@@ -20,7 +22,7 @@ class ProgrammatiqueController: UIViewController {
         monPremierUIView = UIView(frame: CGRect(x: 30, y: 60, width: 200, height: 50))
         monPremierUIView?.backgroundColor = UIColor(red: 30 / 255, green: 123 / 255, blue: 90 / 255, alpha: 1)
         monPremierUIView?.layer.cornerRadius = 25
-        view.addSubview(monPremierUIView!)
+        scroll.addSubview(monPremierUIView!)
         
         monPremierLabel = UILabel(frame: CGRect(x: 0, y: monPremierUIView!.frame.maxY + 20, width: view.frame.width, height: 50))
         monPremierLabel?.text = "Coucou je suis un texte"
@@ -28,7 +30,7 @@ class ProgrammatiqueController: UIViewController {
         monPremierLabel?.textColor = UIColor.white
         monPremierLabel?.font = UIFont(name: "Chalkduster", size: 20)
         monPremierLabel?.textAlignment = .left
-        view.addSubview(monPremierLabel!)
+        scroll.addSubview(monPremierLabel!)
         
         let rectDeMonBouton = CGRect(x: view.frame.width / 2 - 75, y: monPremierLabel!.frame.maxY + 220, width: 150, height: 40)
         monPremierBouton = UIButton(frame: rectDeMonBouton)
@@ -39,7 +41,7 @@ class ProgrammatiqueController: UIViewController {
         monPremierBouton?.backgroundColor = UIColor.black
         monPremierBouton?.layer.borderColor = UIColor.white.cgColor
         monPremierBouton?.layer.borderWidth = 2
-        view.addSubview(monPremierBouton!)
+        scroll.addSubview(monPremierBouton!)
 
         
 
@@ -56,7 +58,7 @@ class ProgrammatiqueController: UIViewController {
         maPremiereIV?.clipsToBounds = true
         // sans cette instruction on a un carré et avec on a un rond parfait !
         maPremiereIV?.layer.cornerRadius = maPremiereIV!.frame.width / 2
-        view.addSubview(maPremiereIV!)
+        scroll.addSubview(maPremiereIV!)
         // en faisant cela le bouton n'est plus visible
         // donc on l'ajoute après : empilement de couches ...
         view.bringSubviewToFront(monPremierBouton!)
@@ -67,7 +69,17 @@ class ProgrammatiqueController: UIViewController {
         // on sait cliquer sur une image, on peut aussi
         maPremiereIV?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageAppuye)))
 
+        let couleurs: [UIColor] = [.red, .blue, .white, .black]
+        var maximum: CGFloat = (maPremiereIV?.frame.maxY)!
         
+        for couleur in couleurs {
+            let vue = UIView(frame: CGRect(x: 0, y: maximum + 10, width: view.frame.width, height: 100))
+            vue.backgroundColor = couleur
+            scroll.addSubview(vue)
+            maximum = vue.frame.maxY
+        }
+        
+        scroll.contentSize = CGSize(width: view.frame.width * 2, height: maximum + 100)
 //        print(monPremierUIView?.frame)
 //        print(monPremierUIView?.bounds)
 //
