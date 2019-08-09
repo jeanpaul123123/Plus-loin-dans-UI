@@ -13,6 +13,7 @@ class ProgrammatiqueController: UIViewController {
     var monPremierUIView: UIView? // ? : en optionnel
     var monPremierLabel : UILabel?
     var monPremierBouton: UIButton?
+    var maPremiereIV: UIImageView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,12 +40,32 @@ class ProgrammatiqueController: UIViewController {
         monPremierBouton?.layer.borderColor = UIColor.white.cgColor
         monPremierBouton?.layer.borderWidth = 2
         view.addSubview(monPremierBouton!)
+
         
 
         // ajout d'une action
         // ce qui se passe quand le bouton est appuyé
         monPremierBouton?.addTarget(self, action: #selector(boutonAppuye), for: .touchUpInside)
+        
+        let largeur = view.frame.width - 60
+        let rectIV = CGRect(x: 30, y: (view.frame.height / 2) - (largeur / 2), width: largeur, height: largeur)
+        maPremiereIV = UIImageView(frame: rectIV)
+        maPremiereIV?.image = UIImage(named: "codabee")
+        maPremiereIV?.contentMode = .scaleAspectFill
+        // permet de tronquer à la vue
+        maPremiereIV?.clipsToBounds = true
+        // sans cette instruction on a un carré et avec on a un rond parfait !
+        maPremiereIV?.layer.cornerRadius = maPremiereIV!.frame.width / 2
+        view.addSubview(maPremiereIV!)
+        // en faisant cela le bouton n'est plus visible
+        // donc on l'ajoute après : empilement de couches ...
+        view.bringSubviewToFront(monPremierBouton!)
 
+        // pour que l'image soit cliquable on ajoute
+        maPremiereIV?.isUserInteractionEnabled = true
+        // UITapGestureRecognizer : quand on tape sur l'image
+        // on sait cliquer sur une image, on peut aussi
+        maPremiereIV?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageAppuye)))
 
         
 //        print(monPremierUIView?.frame)
@@ -65,6 +86,10 @@ class ProgrammatiqueController: UIViewController {
     
     @objc func boutonAppuye() {
         print("tu as bien appuyé")
+    }
+    
+    @objc func imageAppuye() {
+        print("Image touchée")
     }
     
     
