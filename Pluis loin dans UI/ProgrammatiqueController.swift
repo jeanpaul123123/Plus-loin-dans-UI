@@ -11,7 +11,7 @@ import UIKit
 class ProgrammatiqueController: UIViewController {
 
     var monPremierUIView: UIView? // ? : en optionnel
-    
+    var monPremierLabel : UILabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,19 +20,27 @@ class ProgrammatiqueController: UIViewController {
         monPremierUIView?.layer.cornerRadius = 25
         view.addSubview(monPremierUIView!)
         
-        print(monPremierUIView?.frame)
-        print(monPremierUIView?.bounds)
+        monPremierLabel = UILabel(frame: CGRect(x: 0, y: monPremierUIView!.frame.maxY + 20, width: view.frame.width, height: 50))
+        monPremierLabel?.text = "Coucou je suis un texte"
+        monPremierLabel?.numberOfLines = 1
+        monPremierLabel?.textColor = UIColor.white
+        monPremierLabel?.font = UIFont(name: "Chalkduster", size: 20)
+        monPremierLabel?.textAlignment = .left		
+        view.addSubview(monPremierLabel!)
         
-        let secondeVue = UIView(frame: monPremierUIView!.frame)
-        secondeVue.center.y += 100
-        secondeVue.backgroundColor = UIColor.red
-        view.addSubview(secondeVue)
-        
-        let TroisièmeVue = UIView(frame: monPremierUIView!.bounds)
-        TroisièmeVue.center.y += 100
-        // attention : si on met pas de couleurs, on ne la verra pas ... !!!
-        TroisièmeVue.backgroundColor = UIColor.brown
-        view.addSubview(TroisièmeVue)
+//        print(monPremierUIView?.frame)
+//        print(monPremierUIView?.bounds)
+//
+//        let secondeVue = UIView(frame: monPremierUIView!.frame)
+//        secondeVue.center.y += 100
+//        secondeVue.backgroundColor = UIColor.red
+//        view.addSubview(secondeVue)
+//
+//        let TroisièmeVue = UIView(frame: monPremierUIView!.bounds)
+//        TroisièmeVue.center.y += 100
+//        // attention : si on met pas de couleurs, on ne la verra pas ... !!!
+//        TroisièmeVue.backgroundColor = UIColor.brown
+//        view.addSubview(TroisièmeVue)
    
     }
 
