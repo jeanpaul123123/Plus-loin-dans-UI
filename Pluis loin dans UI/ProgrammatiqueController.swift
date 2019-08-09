@@ -12,6 +12,7 @@ class ProgrammatiqueController: UIViewController {
 
     var monPremierUIView: UIView? // ? : en optionnel
     var monPremierLabel : UILabel?
+    var monPremierBouton: UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +26,26 @@ class ProgrammatiqueController: UIViewController {
         monPremierLabel?.numberOfLines = 1
         monPremierLabel?.textColor = UIColor.white
         monPremierLabel?.font = UIFont(name: "Chalkduster", size: 20)
-        monPremierLabel?.textAlignment = .left		
+        monPremierLabel?.textAlignment = .left
         view.addSubview(monPremierLabel!)
+        
+        let rectDeMonBouton = CGRect(x: view.frame.width / 2 - 75, y: monPremierLabel!.frame.maxY + 220, width: 150, height: 40)
+        monPremierBouton = UIButton(frame: rectDeMonBouton)
+        // documentation sur https://developer.apple.com/documentation/uikit/uicontrol/state
+        monPremierBouton?.setTitle("Appuyez", for: UIControl.State.normal)
+        monPremierBouton?.tintColor = UIColor.white
+        monPremierBouton?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        monPremierBouton?.backgroundColor = UIColor.black
+        monPremierBouton?.layer.borderColor = UIColor.white.cgColor
+        monPremierBouton?.layer.borderWidth = 2
+        view.addSubview(monPremierBouton!)
+        
+
+        // ajout d'une action
+        // ce qui se passe quand le bouton est appuyé
+        monPremierBouton?.addTarget(self, action: #selector(boutonAppuye), for: .touchUpInside)
+
+
         
 //        print(monPremierUIView?.frame)
 //        print(monPremierUIView?.bounds)
@@ -43,7 +62,11 @@ class ProgrammatiqueController: UIViewController {
 //        view.addSubview(TroisièmeVue)
    
     }
-
+    
+    @objc func boutonAppuye() {
+        print("tu as bien appuyé")
+    }
+    
     
     
 
